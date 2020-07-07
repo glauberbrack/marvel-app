@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import {
-  StyleSheet,
   View,
   Text,
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
 import { useNavigation } from "@react-navigation/native";
+
+import {styles} from './styles'
 
 import Section from "../../components/Section";
 import Card from "../../components/Card";
@@ -44,14 +44,12 @@ const Home = () => {
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
         <View style={styles.bar}>
-          <Menu />
           <Logo />
-          <Search />
         </View>
 
         <View style={styles.head}>
-          <Text style={styles.title}>Bem vindo ao Marvel Heroes</Text>
-          <Text style={styles.subTitle}>Escolha o seu personagem</Text>
+          <Text style={styles.title}>Welcome to Marvel Heroes!</Text>
+          <Text style={styles.subTitle}>Pick your character</Text>
         </View>
 
         <View style={styles.categories}>
@@ -73,7 +71,7 @@ const Home = () => {
         </View>
 
         <View>
-          <Section title="Heróis" />
+          <Section title="Heroes" />
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {characters
@@ -93,7 +91,7 @@ const Home = () => {
               ))}
           </ScrollView>
 
-          <Section title="Vilões" />
+          <Section title="Villains" />
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {characters
@@ -113,7 +111,7 @@ const Home = () => {
               ))}
           </ScrollView>
 
-          <Section title="Anti-heróis" />
+          <Section title="Anti Heroes" />
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {characters
@@ -153,7 +151,7 @@ const Home = () => {
               ))}
           </ScrollView>
 
-          <Section title="Humanos" />
+          <Section title="Humans" />
 
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
             {characters
@@ -180,42 +178,3 @@ const Home = () => {
 
 export default Home;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 32,
-    paddingTop: 20 + Constants.statusBarHeight,
-  },
-  bar: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  head: {
-    marginTop: 20,
-  },
-  title: {
-    fontFamily: "gilroy-semibold",
-    fontSize: 14,
-    color: "#B7B7C8",
-  },
-  subTitle: {
-    fontFamily: "gilroy-heavy",
-    fontSize: 32,
-    color: "#313140",
-  },
-  categories: {
-    marginTop: 20,
-    marginBottom: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  circle: {
-    width: 56,
-    height: 56,
-    borderRadius: 50,
-    alignContent: "center",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#B7B7C8",
-  },
-});

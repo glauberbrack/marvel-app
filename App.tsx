@@ -19,8 +19,6 @@ export default function App() {
 
   return (
     <>
-
-      {/* Vamos adicionar uma StatusBar na nossa aplicação */}
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"

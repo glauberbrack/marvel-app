@@ -1,17 +1,18 @@
 import React from "react";
-import Constants from "expo-constants";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
 import {
-  StyleSheet,
   View,
   Text,
+  Image,
   ImageBackground,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import SkillBar from "../../components/SkillBar";
 
-import {baseUrl} from '../../services/baseUrl'
+import { styles } from './styles';
+import {baseUrl} from '../../services/baseUrl';
 
 import Back from "../../assets/icons/back.svg";
 import Age from "../../assets/icons/age.svg";
@@ -117,59 +118,49 @@ const Detail = () => {
         <View>
           <Text style={styles.biographyText}>{character.biography}</Text>
         </View>
+
+        <View style={styles.abilities}>
+          <Text style={styles.abilitiesTitle}>Skills</Text>
+          <View style={styles.abilitiesContent}>
+            <Text style={styles.abilitiesText}>Strength</Text>
+            <SkillBar value={character.abilities.force} />
+          </View>
+          <View style={styles.abilitiesContent}>
+            <Text style={styles.abilitiesText}>Intelligence</Text>
+            <SkillBar value={character.abilities.intelligence} />
+          </View>
+          <View style={styles.abilitiesContent}>
+            <Text style={styles.abilitiesText}>Agilidade</Text>
+            <SkillBar value={character.abilities.agility} />
+          </View>
+          <View style={styles.abilitiesContent}>
+            <Text style={styles.abilitiesText}>Endurance</Text>
+            <SkillBar value={character.abilities.endurance} />
+          </View>
+          <View style={styles.abilitiesContent}>
+            <Text style={styles.abilitiesText}>Velocity</Text>
+            <SkillBar value={character.abilities.velocity} />
+          </View>
+        </View>
+
+        <View style={styles.movies}>
+          <Text style={styles.abilitiesTitle}>Movies</Text>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {character.movies.map((movie) => (
+              <View key={movie} style={{ marginRight: 10 }}>
+                <Image
+                  source={{
+                    uri: `${baseUrl}/${movie}`,
+                  }}
+                  style={styles.image}
+                />
+              </View>
+            ))}
+          </ScrollView>
+        </View>
       </ScrollView>
     </ImageBackground>
   );
 };
 
 export default Detail;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 32,
-    paddingTop: 20 + Constants.statusBarHeight,
-  },
-  heroContainer: {
-    marginTop: 252,
-  },
-  alterEgo: {
-    fontFamily: "gilroy-medium",
-    fontSize: 16,
-    color: "#FFFFFF",
-    opacity: 0.75,
-    left: 14,
-  },
-  name: {
-    fontFamily: "gilroy-heavy",
-    fontSize: 40,
-    color: "#FFFFFF",
-    flexShrink: 1,
-    left: 14,
-    width: 180,
-  },
-  characteristics: {
-    marginTop: 20,
-    marginBottom: 20,
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  characteristicsContent: {
-    width: 60,
-    height: 48,
-    alignContent: "center",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-  characteristicsText: {
-    fontFamily: "gilroy-medium",
-    fontSize: 12,
-    color: "#FFFFFF",
-  },
-  biographyText: {
-    fontFamily: "gilroy-medium",
-    fontSize: 14,
-    color: "#FFFFFF",
-    opacity: 0.75,
-  },
-});
