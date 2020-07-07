@@ -1,7 +1,10 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { useState, useEffect } from "react";
+import { StyleSheet, View, Text, ScrollView } from "react-native";
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
+
+import Section from "../../components/Section";
+import Card from "../../components/Card";
 
 import Menu from "../../assets/icons/menu.svg";
 import Logo from "../../assets/icons/logo.svg";
@@ -12,8 +15,22 @@ import Villain from "../../assets/icons/villain.svg";
 import Antihero from "../../assets/icons/antihero.svg";
 import Alien from "../../assets/icons/alien.svg";
 import Human from "../../assets/icons/human.svg";
+import api from "../../services/api";
+
+interface ICharacter {
+  name: string;
+  category: string;
+  alterEgo: string;
+  imagePath: string;
+}
 
 const Home = () => {
+  const [characters, setCharacters] = useState<ICharacter[]>([]);
+
+  useEffect(() => {
+    api.get("/").then(({ data }) => setCharacters(data));
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.bar}>
@@ -29,7 +46,7 @@ const Home = () => {
 
       <View style={styles.categories}>
         <LinearGradient colors={["#005BEA", "#00C6FB"]} style={styles.circle}>
-          <Hero color="#FFF"/>
+          <Hero />
         </LinearGradient>
         <LinearGradient colors={["#ED1D24", "#ED1F69"]} style={styles.circle}>
           <Villain />
@@ -43,6 +60,27 @@ const Home = () => {
         <LinearGradient colors={["#FF7EB3", "#FF758C"]} style={styles.circle}>
           <Human />
         </LinearGradient>
+      </View>
+
+      <View>
+        <Section title="Heróis" />
+
+        {/* 
+         Vamos utilizar o ScrollView com a propriedade horizontal para 
+         criar o efeito de rolagem dos cards para o lado.
+        */}
+
+        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {characters
+            .filter((character) => character.category === "heroes")
+            .map((character) => (
+              <Card
+                name={character.name}
+                alterEgo={character.alterEgo}
+                imagePath={character.imagePath}
+              />
+            ))}
+        </ScrollView>
       </View>
     </View>
   );

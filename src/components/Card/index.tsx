@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
+import {baseUrl} from '../../services/baseUrl'
 
 interface ICharacter {
   name: string;
@@ -11,7 +12,7 @@ const Card: React.FC<ICharacter> = ({ name, alterEgo, imagePath }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={{ uri: `http://192.168.0.18:3333/${imagePath}` }}
+        source={{ uri: `${baseUrl}/${imagePath}` }}
         style={styles.image}
       />
       <Text style={styles.alterEgo}>{alterEgo}</Text>
