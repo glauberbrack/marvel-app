@@ -24,18 +24,17 @@ export const styles = StyleSheet.create({
     alterEgo: {
       fontFamily: "gilroy-medium",
       fontSize: 10,
-      marginBottom: 5,
       color: "#FFFFFF",
       opacity: 0.75,
   
       position: "absolute",
       left: 14,
-      bottom: 45,
+      bottom: 25,
     },
     name: {
       maxWidth: 100,
       fontFamily: "gilroy-heavy",
-      fontSize: 20,
+      fontSize: 14,
       color: "#FFFFFF",
   
       flexShrink: 1,

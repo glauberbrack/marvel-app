@@ -90,7 +90,7 @@ const Detail = () => {
             <Text style={styles.characteristicsText}>
               {`${
                 new Date().getFullYear() - character.caracteristics.birth
-              } anos`}
+              } years old`}
             </Text>
           </View>
           <View style={styles.characteristicsContent}>
