@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import Constants from "expo-constants";
 import { LinearGradient } from "expo-linear-gradient";
+import { useNavigation } from "@react-navigation/native";
 
 import Section from "../../components/Section";
 import Card from "../../components/Card";
@@ -18,6 +25,7 @@ import Human from "../../assets/icons/human.svg";
 import api from "../../services/api";
 
 interface ICharacter {
+  id: number;
   name: string;
   category: string;
   alterEgo: string;
@@ -25,6 +33,7 @@ interface ICharacter {
 }
 
 const Home = () => {
+  const navigation = useNavigation();
   const [characters, setCharacters] = useState<ICharacter[]>([]);
 
   useEffect(() => {
@@ -32,57 +41,140 @@ const Home = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.bar}>
-        <Menu />
-        <Logo />
-        <Search />
+    <ScrollView showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <View style={styles.bar}>
+          <Menu />
+          <Logo />
+          <Search />
+        </View>
+
+        <View style={styles.head}>
+          <Text style={styles.title}>Bem vindo ao Marvel Heroes</Text>
+          <Text style={styles.subTitle}>Escolha o seu personagem</Text>
+        </View>
+
+        <View style={styles.categories}>
+          <LinearGradient colors={["#005BEA", "#00C6FB"]} style={styles.circle}>
+            <Hero />
+          </LinearGradient>
+          <LinearGradient colors={["#ED1D24", "#ED1F69"]} style={styles.circle}>
+            <Villain />
+          </LinearGradient>
+          <LinearGradient colors={["#B224EF", "#7579FF"]} style={styles.circle}>
+            <Antihero />
+          </LinearGradient>
+          <LinearGradient colors={["#0BA360", "#3CBA92"]} style={styles.circle}>
+            <Alien />
+          </LinearGradient>
+          <LinearGradient colors={["#FF7EB3", "#FF758C"]} style={styles.circle}>
+            <Human />
+          </LinearGradient>
+        </View>
+
+        <View>
+          <Section title="Heróis" />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {characters
+              .filter((character) => character.category === "heroes")
+              .map((character) => (
+                <TouchableOpacity
+                  key={String(character.id)}
+                  onPress={() => navigation.navigate("Detail", { character })}
+                  activeOpacity={0.6}
+                >
+                  <Card
+                    name={character.name}
+                    alterEgo={character.alterEgo}
+                    imagePath={character.imagePath}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+
+          <Section title="Vilões" />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {characters
+              .filter((character) => character.category === "villains")
+              .map((character) => (
+                <TouchableOpacity
+                  key={String(character.id)}
+                  onPress={() => navigation.navigate("Detail", { character })}
+                  activeOpacity={0.6}
+                >
+                  <Card
+                    name={character.name}
+                    alterEgo={character.alterEgo}
+                    imagePath={character.imagePath}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+
+          <Section title="Anti-heróis" />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {characters
+              .filter((character) => character.category === "antiHeroes")
+              .map((character) => (
+                <TouchableOpacity
+                  key={String(character.id)}
+                  onPress={() => navigation.navigate("Detail", { character })}
+                  activeOpacity={0.6}
+                >
+                  <Card
+                    name={character.name}
+                    alterEgo={character.alterEgo}
+                    imagePath={character.imagePath}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+
+          <Section title="Aliens" />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {characters
+              .filter((character) => character.category === "aliens")
+              .map((character) => (
+                <TouchableOpacity
+                  key={String(character.id)}
+                  onPress={() => navigation.navigate("Detail", { character })}
+                  activeOpacity={0.6}
+                >
+                  <Card
+                    name={character.name}
+                    alterEgo={character.alterEgo}
+                    imagePath={character.imagePath}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+
+          <Section title="Humanos" />
+
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            {characters
+              .filter((character) => character.category === "humans")
+              .map((character) => (
+                <TouchableOpacity
+                  key={String(character.id)}
+                  onPress={() => navigation.navigate("Detail", { character })}
+                  activeOpacity={0.6}
+                >
+                  <Card
+                    name={character.name}
+                    alterEgo={character.alterEgo}
+                    imagePath={character.imagePath}
+                  />
+                </TouchableOpacity>
+              ))}
+          </ScrollView>
+        </View>
       </View>
-
-      <View style={styles.head}>
-        <Text style={styles.title}>Bem vindo ao Marvel Heroes</Text>
-        <Text style={styles.subTitle}>Escolha o seu personagem</Text>
-      </View>
-
-      <View style={styles.categories}>
-        <LinearGradient colors={["#005BEA", "#00C6FB"]} style={styles.circle}>
-          <Hero />
-        </LinearGradient>
-        <LinearGradient colors={["#ED1D24", "#ED1F69"]} style={styles.circle}>
-          <Villain />
-        </LinearGradient>
-        <LinearGradient colors={["#B224EF", "#7579FF"]} style={styles.circle}>
-          <Antihero />
-        </LinearGradient>
-        <LinearGradient colors={["#0BA360", "#3CBA92"]} style={styles.circle}>
-          <Alien />
-        </LinearGradient>
-        <LinearGradient colors={["#FF7EB3", "#FF758C"]} style={styles.circle}>
-          <Human />
-        </LinearGradient>
-      </View>
-
-      <View>
-        <Section title="Heróis" />
-
-        {/* 
-         Vamos utilizar o ScrollView com a propriedade horizontal para 
-         criar o efeito de rolagem dos cards para o lado.
-        */}
-
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {characters
-            .filter((character) => character.category === "heroes")
-            .map((character) => (
-              <Card
-                name={character.name}
-                alterEgo={character.alterEgo}
-                imagePath={character.imagePath}
-              />
-            ))}
-        </ScrollView>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 

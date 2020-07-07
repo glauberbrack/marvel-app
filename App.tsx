@@ -1,9 +1,10 @@
 import React from "react";
+import { StatusBar, Text } from "react-native";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
 
-// Importação da nossa nova página
-import Home from "./src/pages/Home";
+// Importação do arquivo de rotas
+import Routes from "./src/routes";
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -16,5 +17,17 @@ export default function App() {
 
   if (!fontsLoaded) return <AppLoading />;
 
-  return <Home />;
+  return (
+    <>
+
+      {/* Vamos adicionar uma StatusBar na nossa aplicação */}
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent
+      />
+
+      <Routes />
+    </>
+  );
 }
