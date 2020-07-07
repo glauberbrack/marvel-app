@@ -3,6 +3,8 @@
     <img alt="marvel" title="#marvel" src=".github/logo.svg" width="250px" />
 </h1>
 
+<img alt="marvel" title="#marvel" src=".github/app.png" width="720px" />
+
 <h4 align="center">
   Marvel Heroes
 </h4>
@@ -10,8 +12,7 @@
 <p align="center">
   <a href="#-project">Project</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#rocket-techs">Techs</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rocket-executando">Executando</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#memo-licença">Licença</a>
+  <a href="#rocket-Running">Running</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
 </p>
 <br>
 
@@ -29,7 +30,7 @@
 - [Expo](https://expo.io/)
 
 
-## :notebook: Running your project
+## :notebook: Running
 
 ### Requeriments
 
