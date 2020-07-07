@@ -1,32 +1,20 @@
-import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 import { AppLoading } from "expo";
 import { useFonts } from "@use-expo/font";
 
-import api from "./src/services/api";
+// Importação da nossa nova página
+import Home from "./src/pages/Home";
 
 export default function App() {
-  const [data, setData] = useState("");
+  const [fontsLoaded] = useFonts({
+    "gilroy-bold": require("./assets/fonts/gilroy-bold.ttf"),
+    "gilroy-heavy": require("./assets/fonts/gilroy-heavy.ttf"),
+    "gilroy-medium": require("./assets/fonts/gilroy-medium.ttf"),
+    "gilroy-regular": require("./assets/fonts/gilroy-regular.ttf"),
+    "gilroy-semibold": require("./assets/fonts/gilroy-semibold.ttf"),
+  });
 
-  useEffect(() => {
-    api.get("/").then(({ data }) => setData(JSON.stringify(data[0])));
-  }, []);
+  if (!fontsLoaded) return <AppLoading />;
 
-  return (
-    <View style={styles.container}>
-      <Text>{data}</Text>
-    </View>
-  );
+  return <Home />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  text: {
-    fontFamily: "gilroy-semibold",
-  },
-});
